@@ -58,7 +58,7 @@ module.exports.forgotPassword = (req, res, next) => {
       User.findOne({ email: req.body.email }, (err, user) => {
         if (!user) {
           req.flash('error', 'No account with that email address exists.');
-          return res.redirect('/forgot');
+          return res.redirect('/forgotP');
         }
 
         user.resetPasswordToken = token;
@@ -73,8 +73,8 @@ module.exports.forgotPassword = (req, res, next) => {
       const smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-          user: 'nawafDeveloper2020@gmail.com',
-          pass: process.env.GMAILPW,
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASS,
         },
       });
       const mailOptions = {
@@ -104,7 +104,7 @@ module.exports.forgotPassword = (req, res, next) => {
     },
   ], (err) => {
     if (err) return next(err);
-    res.redirect('/forgot');
+    res.redirect('/forgotP');
   });
 };
 
@@ -117,7 +117,7 @@ module.exports.renderReset = (req, res) => {
     (err, user) => {
       if (!user) {
         req.flash('error', 'Password reset token is invalid or has expired.');
-        return res.redirect('/forgot');
+        return res.redirect('/forgotP');
       }
       res.render('users/reset', { token: req.params.token });
     }

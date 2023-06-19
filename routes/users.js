@@ -13,7 +13,10 @@ router.get('/register', users.renderRegister)
 router.post('/register', validateUser, catchAsync(users.register))
 
 router.get('/login', users.renderLogin)
-router.get('/forgotP', users.renderforgotP)
+router.get('/forgotP', users.renderForgotP)
+router.post('/forgotP', users.forgotPassword)
+router.get('/reset/:token', users.renderReset)
+router.post('/reset/:token', users.resetPassword)
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.login)
 
