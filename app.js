@@ -38,6 +38,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 // Helmet.js is a Node.js module that helps in securing HTTP headers. It is implemented in express applications. Therefore, we can say that helmet.js helps in securing express applications
 const helmet = require('helmet');
 
+
+
 // npm i express-mongo-sanitize
 app.use(mongoSanitize())   //it will not allow keywords through query strings or params like $gt
 
